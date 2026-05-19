@@ -5,7 +5,7 @@
   <title>Open in Cursor</title>
   <style>
     body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f5f5f5; }
-    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:420px; }
+    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:440px; }
     h2 { margin:0 0 8px; color:#181B34; }
     p { color:#6B7B8D; margin:0 0 28px; }
     a.btn { display:inline-block; background:#6161FF; color:white; text-decoration:none; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; }
@@ -16,8 +16,8 @@
 <body>
   <div class="card">
     <h2>🔍 Deep dive with Cursor</h2>
-    <p>Opens an AI analysis session scoped to the Service Daily Numbers data.</p>
-    <a class="btn" href="cursor://anysphere.cursor-deeplink/prompt?text=Source%3A%20Redash%20%E2%80%94%20Service%20Daily%20Numbers%20dashboard%20%28ID%3A%204458%29%0AURL%3A%20https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F4458%0A%0ALoad%20the%20data-context-resolution%20skill%20and%20resolve%20the%20source%20context%20for%20this%20dashboard.%0A%0AWhat%20would%20you%20like%20to%20understand%20about%20this%20data%3F">Open in Cursor →</a>
+    <p>Opens an AI analysis session scoped to Service Daily Numbers.<br>Resolves source data, then asks what you want to understand.</p>
+    <a class="btn" href="cursor://anysphere.cursor-deeplink/prompt?text=Source%3A%20Redash%20%E2%80%94%20Service%20Daily%20Numbers%20dashboard%20%28ID%3A%204458%29%0AURL%3A%20https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F4458%0A%0AStep%201%20%E2%80%94%20Load%20the%20data-context-resolution%20skill%20and%20resolve%20the%20underlying%20queries%2C%20tables%2C%20and%20business%20definitions%20for%20this%20source.%0A%0AStep%202%20%E2%80%94%20Load%20the%20analytical-brief%20skill.%20State%20your%20scope%20assumptions%2C%20then%20ask%20what%20I%20want%20to%20understand.">Open in Cursor →</a>
     <small>Requires Cursor installed</small>
   </div>
 </body>
