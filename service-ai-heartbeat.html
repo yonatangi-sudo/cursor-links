@@ -22,14 +22,14 @@
     <h2>🔍 Deep dive with AI</h2>
     <p>Opens an AI analysis session for Service AI Heartbeat.<br>Just type your question in the prompt.</p>
     <div class="buttons">
-      <a class="btn" href="cursor://anysphere.cursor-deeplink/prompt?text=I%27m%20looking%20at%20the%20Service%20AI%20Heartbeat%20dashboard%20%28https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F5267-service-ai-heartbeat%29.%0A%0AWhat%20would%20you%20like%20to%20understand%20about%20this%20data%3F">Open in Cursor →</a>
+      <a class="btn" href="cursor://anysphere.cursor-deeplink/prompt?text=I%27m%20looking%20at%20the%20Service%20AI%20Heartbeat%20dashboard%20%28https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F5267-service-ai-heartbeat%29.%0A%0AWhat%20would%20you%20like%20to%20understand%20about%20this%20data%3F%20Or%20phrase%20a%20freestyle%20question%20%E2%80%94%20I%27ll%20ask%20for%20clarifications%20if%20needed.">Open in Cursor →</a>
       <button class="btn-claude" onclick="copyToClaude()">Copy to Claude →</button>
     </div>
     <small>Cursor requires the app installed · Claude copies prompt to clipboard</small>
   </div>
   <script>
     function copyToClaude() {
-      var prompt = decodeURIComponent('I%27m%20looking%20at%20the%20Service%20AI%20Heartbeat%20dashboard%20%28https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F5267-service-ai-heartbeat%29.%0A%0AWhat%20would%20you%20like%20to%20understand%20about%20this%20data%3F');
+      var prompt = decodeURIComponent('I%27m%20looking%20at%20the%20Service%20AI%20Heartbeat%20dashboard%20%28https%3A%2F%2Fredash.bigbrain.me%2Fdashboards%2F5267-service-ai-heartbeat%29.%0A%0AWhat%20would%20you%20like%20to%20understand%20about%20this%20data%3F%20Or%20phrase%20a%20freestyle%20question%20%E2%80%94%20I%27ll%20ask%20for%20clarifications%20if%20needed.');
       navigator.clipboard.writeText(prompt);
       var btn = document.querySelector('.btn-claude');
       btn.textContent = 'Copied!';
