@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Deep dive with AI</title>
+  <!-- prompt-version: 1 -->
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f5f5f5; }
+    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:480px; }
+    h2 { margin:0 0 8px; color:#181B34; }
+    p { color:#6B7B8D; margin:0 0 28px; }
+    .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a.btn { display:inline-block; background:#6161FF; color:white; text-decoration:none; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; }
+    a.btn:hover { background:#4b4bdd; }
+    button.btn-claude { display:inline-block; background:#D97706; color:white; border:none; cursor:pointer; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; transition:background 0.2s; }
+    button.btn-claude:hover { background:#b45309; }
+    button.btn-claude.copied { background:#16a34a; }
+    small { display:block; margin-top:16px; color:#aaa; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔍 Deep dive with AI</h2>
+    <p>Opens an AI analysis session for Service AI weekly lists.<br>Just type your question in the prompt.</p>
+    <div class="buttons">
+      <a class="btn" id="cursorLink" href="#">Open in Cursor →</a>
+      <button class="btn-claude" onclick="copyToClaude()">Copy to Claude →</button>
+    </div>
+    <small>Cursor requires the app installed · Claude copies prompt to clipboard · v1</small>
+  </div>
+  <script>
+    var PROMPT = "I'm looking at the Service AI weekly lists app (https://bigbrain.me/bigbrain-vibe/service-ai-weekly-lists).\n\nThis app shows rolling 7-day lists aligned with the #service-ai-agent-numbers daily message:\n- Tab 1: Ticket funnel (resolved / assigned / triaged per ticket)\n- Tab 2: Active agents (PRODUCT.L3.DIM_SERVICE_AGENTS)\n- Tab 3: First AI activity accounts (Q148013 cohort)\n\nSQL definitions: playground/analysis/2026-07-27_service_ai_weekly_lists/queries/\n\nWhat would you like to understand about this data? Or phrase a freestyle question — I'll ask for clarifications if needed.";
+    document.getElementById('cursorLink').href = 'cursor://anysphere.cursor-deeplink/prompt?text=' + encodeURIComponent(PROMPT);
+    function copyToClaude() {
+      navigator.clipboard.writeText(PROMPT);
+      var btn = document.querySelector('.btn-claude');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function(){ btn.textContent = 'Copy to Claude →'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>
