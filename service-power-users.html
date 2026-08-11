@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Deep dive with AI</title>
+  <!-- prompt-version: 1 -->
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f5f5f5; }
+    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:480px; }
+    h2 { margin:0 0 8px; color:#181B34; }
+    p { color:#6B7B8D; margin:0 0 28px; }
+    .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a.btn { display:inline-block; background:#6161FF; color:white; text-decoration:none; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; }
+    a.btn:hover { background:#4b4bdd; }
+    button.btn-claude { display:inline-block; background:#D97706; color:white; border:none; cursor:pointer; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; transition:background 0.2s; }
+    button.btn-claude:hover { background:#b45309; }
+    button.btn-claude.copied { background:#16a34a; }
+    small { display:block; margin-top:16px; color:#aaa; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔍 Deep dive with AI</h2>
+    <p>Opens an AI analysis session for Service power users.<br>Just type your question in the prompt.</p>
+    <div class="buttons">
+      <a class="btn" id="cursorLink" href="#">Open in Cursor →</a>
+      <button class="btn-claude" onclick="copyToClaude()">Copy to Claude →</button>
+    </div>
+    <small>Cursor requires the app installed · Claude copies prompt to clipboard · v1</small>
+  </div>
+  <script>
+    var PROMPT = "I'm looking at the Service power users Z2H app (user \u00d7 account pool).\n\nApp: \"service-power-users\"\nURL: https://bigbrain.me/bigbrain-vibe/service-power-users\nSource folder: ~/zth-projects/service-power-users\nSQL: embedded pool query in src/page.html (Service power users \u2014 user \u00d7 account pool)\n\nThis app lists eligible Service power users (user \u00d7 account grain) for outreach / enablement. Gates (all required unless the SQL says otherwise): paying Service account, active Service user, Service AI ticket_received in past 30d (account), SAI activity in past 14d (account), agent-config signal (user ever), tickets in past 28d (account). Activity columns cover account 14d AI tickets / active agents / KB adds and user 14d agents-hub engagement.\n\nStandard exclusions: pulse_account_id <> 5; no @monday.com domains.\n\nBefore answering any question:\n1. Read the live SQL in ~/zth-projects/service-power-users/src/page.html \u2014 use those gate definitions; do not invent alternate pool criteria.\n2. For drill-downs, run the same Snowflake pool logic (or scoped variants) and join dim_accounts / events as in the app. Prefer snow sql; Kramer MCP only as fallback.\n3. Do not speculate about numbers -- always query the data first.\n\nWhat would you like to understand about this data? Or phrase a freestyle question \u2014 I'll ask for clarifications if needed.\n";
+    document.getElementById('cursorLink').href = 'cursor://anysphere.cursor-deeplink/prompt?text=' + encodeURIComponent(PROMPT);
+    function copyToClaude() {
+      navigator.clipboard.writeText(PROMPT);
+      var btn = document.querySelector('.btn-claude');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Copy to Claude →'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>
