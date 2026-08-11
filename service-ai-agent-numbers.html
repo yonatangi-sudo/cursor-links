@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Deep dive with AI</title>
+  <!-- prompt-version: 1 -->
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f5f5f5; }
+    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:480px; }
+    h2 { margin:0 0 8px; color:#181B34; }
+    p { color:#6B7B8D; margin:0 0 28px; }
+    .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a.btn { display:inline-block; background:#6161FF; color:white; text-decoration:none; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; }
+    a.btn:hover { background:#4b4bdd; }
+    button.btn-claude { display:inline-block; background:#D97706; color:white; border:none; cursor:pointer; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; transition:background 0.2s; }
+    button.btn-claude:hover { background:#b45309; }
+    button.btn-claude.copied { background:#16a34a; }
+    small { display:block; margin-top:16px; color:#aaa; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔍 Deep dive with AI</h2>
+    <p>Opens an AI analysis session for Service AI agent numbers message.<br>Just type your question in the prompt.</p>
+    <div class="buttons">
+      <a class="btn" id="cursorLink" href="#">Open in Cursor →</a>
+      <button class="btn-claude" onclick="copyToClaude()">Copy to Claude →</button>
+    </div>
+    <small>Cursor requires the app installed · Claude copies prompt to clipboard · v1</small>
+  </div>
+  <script>
+    var PROMPT = "I'm looking at the Service AI agent numbers Slack message (#service-ai-agent-numbers).\n\nNotification: Service AI release / agentic pulse (notifications-system id 1da29565-f2ee-4744-b8bf-6105336e8448)\nChannel: #service-ai-agent-numbers (C09V61HCSQN)\nMaintainer scripts: playground/analysis/2026-06-17_weekly_service_ai_notification/ (push_weekly_notification.py, push_weekly_queries.py)\nAligned list app: https://bigbrain.me/bigbrain-vibe/service-ai-weekly-lists\nCohort / list SQL: playground/analysis/2026-07-27_service_ai_weekly_lists/queries/ (ticket funnel, active agents, first AI activity Q148013 family)\n\nThis message tracks Service AI agentic adoption and quality signals (resolutions, agents, first AI activity accounts, related Redash lines). Definitions should match the weekly lists app and the Redash queries behind the notification.\n\nRelated: Service AI Heartbeat (Redash 5267 / Z2H service-ai-heartbeat); do not conflate with #monday-service-data KR lines without labeling.\n\nBefore answering any question:\n1. Resolve metrics from the notification's Redash query SQL and playground/analysis/2026-07-27_service_ai_weekly_lists/queries/ (plus cookbook Service AI defs when present) \u2014 use those definitions.\n2. For drill-downs, run the same Snowflake logic (or scoped variants) via snow sql; prefer RAW_SERVICE_EVENTS / DIM_SERVICE_AGENTS patterns already in those queries.\n3. Do not speculate about numbers -- always query the data first.\n\nWhat would you like to understand about this data? Or phrase a freestyle question \u2014 I'll ask for clarifications if needed.\n";
+    document.getElementById('cursorLink').href = 'cursor://anysphere.cursor-deeplink/prompt?text=' + encodeURIComponent(PROMPT);
+    function copyToClaude() {
+      navigator.clipboard.writeText(PROMPT);
+      var btn = document.querySelector('.btn-claude');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Copy to Claude →'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>
