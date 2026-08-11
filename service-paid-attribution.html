@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>Deep dive with AI</title>
+  <!-- prompt-version: 1 -->
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; display:flex; align-items:center; justify-content:center; height:100vh; margin:0; background:#f5f5f5; }
+    .card { background:white; border-radius:12px; padding:40px 48px; text-align:center; box-shadow:0 4px 24px rgba(0,0,0,0.1); max-width:480px; }
+    h2 { margin:0 0 8px; color:#181B34; }
+    p { color:#6B7B8D; margin:0 0 28px; }
+    .buttons { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    a.btn { display:inline-block; background:#6161FF; color:white; text-decoration:none; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; }
+    a.btn:hover { background:#4b4bdd; }
+    button.btn-claude { display:inline-block; background:#D97706; color:white; border:none; cursor:pointer; padding:14px 32px; border-radius:8px; font-weight:600; font-size:16px; transition:background 0.2s; }
+    button.btn-claude:hover { background:#b45309; }
+    button.btn-claude.copied { background:#16a34a; }
+    small { display:block; margin-top:16px; color:#aaa; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>🔍 Deep dive with AI</h2>
+    <p>Opens an AI analysis session for Service paid attribution.<br>Just type your question in the prompt.</p>
+    <div class="buttons">
+      <a class="btn" id="cursorLink" href="#">Open in Cursor →</a>
+      <button class="btn-claude" onclick="copyToClaude()">Copy to Claude →</button>
+    </div>
+    <small>Cursor requires the app installed · Claude copies prompt to clipboard · v1</small>
+  </div>
+  <script>
+    var PROMPT = "I'm looking at the Service paid attribution Z2H app.\n\nApp: \"service-paid-attribution\"\nURL: https://bigbrain.me/bigbrain-vibe/service-paid-attribution\nSource folder: ~/zth-projects/service-paid-attribution\nSQL: src/queries.ts (DAILY_DELIVERY_SQL + DAILY_OUTCOMES_SQL) and the same SQL embedded in src/page.html\nAttribution docs: playground/analysis/2026-08-09_service_digital_marketing_roi/ATTRIBUTION.md\n\nThis app measures Service paid marketing delivery and outcomes under a generous 30-day last Service touch model (not BigBrainTouchV9). Grain is day \u00d7 campaign \u00d7 channel \u00d7 ad network. Brand flag = campaign name contains \"brand\" (case-insensitive).\n\nKey metrics:\n- Delivery: spend, clicks, unique visits (CM ADN / people)\n- Outcomes: leads, opps, opp ARR (all CLAIMED_ARR excluding downgrades), overall generated ARR (= SF Closed Won CLAIMED_ARR + Service FIRST_PRODUCT_ARR when first pay is within 21d of install)\n- Efficiency (client-side after filters): CPC, CPL, CPO, ROAS = overall generated ARR \u00f7 spend\n\nRelated work: playground/analysis/2026-08-09_service_digital_marketing_roi/ (jan_jul generous 30d SQL/CSVs). Tableau Service Campaign Monitoring is a different attribution model \u2014 do not mix without labeling.\n\nBefore answering any question:\n1. Read the live SQL in ~/zth-projects/service-paid-attribution/src/queries.ts (and ATTRIBUTION.md) \u2014 use those definitions; do not reinvent attribution, ROAS, or ARR formulas.\n2. For drill-downs beyond the UI, run the same Snowflake logic parameterized by the user's date range (or scoped variants). Prefer snow sql; Kramer MCP only as fallback.\n3. Do not speculate about numbers -- always query the data first.\n\nWhat would you like to understand about this data? Or phrase a freestyle question \u2014 I'll ask for clarifications if needed.\n";
+    document.getElementById('cursorLink').href = 'cursor://anysphere.cursor-deeplink/prompt?text=' + encodeURIComponent(PROMPT);
+    function copyToClaude() {
+      navigator.clipboard.writeText(PROMPT);
+      var btn = document.querySelector('.btn-claude');
+      btn.textContent = 'Copied!';
+      btn.classList.add('copied');
+      setTimeout(function () { btn.textContent = 'Copy to Claude →'; btn.classList.remove('copied'); }, 2000);
+    }
+  </script>
+</body>
+</html>
